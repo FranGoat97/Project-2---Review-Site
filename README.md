@@ -17,3 +17,21 @@ Group Project - A site where a user can leave reviews
 * The user will NOT have access to certain parts of the site while they remain logged out
 * The user will have the ability to create, edit or delete a review, but only their own. 
 * Users that are not logged in can still see other's reviews.
+
+
+***Models***
+
+User {
+username: {type: String, require: true},
+password: {type: String, require: true}
+reviews: [{
+}]
+}
+
+Reviews {
+subject: {type: String, require: true},
+rating: {type: String, require: true},
+bodyOfDescription: {type: String}
+}
+
+* The User model will have a relationship with the Reviews model. So the reviews property of User is the reference to the Reviews model.

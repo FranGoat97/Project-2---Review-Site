@@ -35,3 +35,12 @@ bodyOfDescription: {type: String}
 }
 
 * The User model will have a relationship with the Reviews model. So the reviews property of User is the reference to the Reviews model.
+
+
+
+
+
+
+
+
+![Wireframe](wireframe.jpg)

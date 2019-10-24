@@ -43,4 +43,4 @@ bodyOfDescription: {type: String}
 
 
 
-![Wireframe](wireframe.jpg)
+![Wireframe](https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.imgur.com%2FWDQxYVk.jpg)

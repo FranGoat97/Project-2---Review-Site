@@ -14,6 +14,10 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/new', (req, res) => {
+    res.render('users/new.ejs')
+});
+
 
 
 

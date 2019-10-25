@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const session = require('express-session');
 require('./db/db');
+
+app.set('view engine', 'ejs');
 app.use(session({
     secret: "secret string",
     resave: false, 

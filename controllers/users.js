@@ -22,7 +22,7 @@ router.get('/new', (req, res) => {
 
 // password 
 
-router.post('/new', (req, res, next) => {
+router.post('/', (req, res, next) => {
 
   // first we are going to hash the password
   const password = req.body.password;
@@ -43,17 +43,8 @@ router.post('/new', (req, res, next) => {
     res.redirect('/users')
   });
 
-
-router.post('/', (req, res) => {
-    User.create(req.body, (err, createdUser) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.redirect('/users');
-        }
-    })
-
 })
+
 
 
 

@@ -19,8 +19,14 @@ app.use('/users', userController);
 app.use('/reviews', reviewController);
 
 app.get('/', (req, res) => {
+<<<<<<< HEAD
     console.log(req.session, 'home page');
     res.render('index.ejs')
+=======
+    res.render('index.ejs', {
+    	message: req.session.message
+    })
+>>>>>>> master
 });
 
 

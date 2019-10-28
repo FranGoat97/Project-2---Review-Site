@@ -23,6 +23,20 @@ router.get('/registration', (req,res)=>{
     res.render('users/register.ejs')
 })
 
+router.get('/:id', (req, res) => {
+
+  User.findById(req.params.id, (err, foundUser) => {
+    if(err){
+      res.send(err);
+    } else {
+      res.render('users/show.ejs', {
+        user: foundUser
+      });
+    }
+  })
+
+});
+
 // password encrypt
 
 router.post('/registration', (req, res, next) => {
@@ -43,7 +57,7 @@ router.post('/registration', (req, res, next) => {
     // lets set up the session in here we can use the same code we created in the login
     req.session.username = user.username;
     req.session.logged   = true;
-    res.redirect('/users')
+    res.redirect('/users/' + user._id)
   });
 
 })
@@ -60,7 +74,7 @@ router.post('/login', (req, res, next) => {
                 req.session.logged   = true;
                 console.log(req.session, req.body)
 
-                res.redirect('/users')
+                res.redirect('/users/' + user._id)
             } else {
               console.log('else in bcrypt compare')
               req.session.message = 'Username or password are incorrect';

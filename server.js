@@ -24,6 +24,21 @@ app.get('/', (req, res) => {
     })
 });
 
+app.get('/logout', (req, res) => {
+
+  // creates a brand new cookie, without any of our properties
+  // that we previously added to it
+  req.session.destroy((err) => {
+    if(err){
+      res.send(err);
+    } else {
+      res.redirect('/');
+    }
+  })
+
+})
+
+
 
 
 

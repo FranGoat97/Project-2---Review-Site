@@ -15,14 +15,17 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/new', (req, res) => {
-    res.render('users/new.ejs')
+router.get('/login', (req, res) => {
+    res.render('users/login.ejs')
 });
 
+router.get('/registration', (req,res)=>{
+    res.render('users/register.ejs')
+})
 
-// password 
+// password encrypt
 
-router.post('/', (req, res, next) => {
+router.post('/registration', (req, res, next) => {
 
   // first we are going to hash the password
   const password = req.body.password;
@@ -45,18 +48,50 @@ router.post('/', (req, res, next) => {
 
 })
 
+router.post('/login', (req, res, next) => {
+
+  User.findOne({username: req.body.username}, (err, user) => {
+        console.log(user);
+      if(user){
+                     //now compare hash with the password from the form
+            if(bcrypt.compareSync(req.body.password, user.password)){
+                req.session.message  = '';
+                req.session.username = req.body.username;
+                req.session.logged   = true;
+                console.log(req.session, req.body)
+
+                res.redirect('/users')
+            } else {
+              console.log('else in bcrypt compare')
+              req.session.message = 'Username or password are incorrect';
+              res.redirect('/')
+
+            }
+
+      } else {
+
+          req.session.message = 'Username or password are incorrect';
+          res.redirect('/')
+
+      } 
+  });
+
+})
 
 
+router.get('/logout', (req, res) => {
 
+  // creates a brand new cookie, without any of our properties
+  // that we previously added to it
+  req.session.destroy((err) => {
+    if(err){
+      res.send(err);
+    } else {
+      res.redirect('/');
+    }
+  })
 
-
-
-
-
-
-
-
-
+})
 
 
 

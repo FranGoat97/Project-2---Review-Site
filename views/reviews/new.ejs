@@ -7,6 +7,8 @@
     <title>New Review Page</title>
 </head>
 <body>
+    <div class="container">
+            <%- include('../partials/navbar') %>
     <h1>Leave a new review</h1>
     <form action="/reviews" method="POST">
     Subject: <input type="text" name="subject"></br>

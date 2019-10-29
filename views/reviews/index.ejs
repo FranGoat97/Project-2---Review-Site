@@ -10,6 +10,15 @@
 	<div class="container">
             <%- include('../partials/navbar') %>
     <h1>All user reviews</h1>
+
+    <ul>
+        <% for (let i = 0; i < reviews.length; i++) {%>
+        <li><%=reviews[i].subject%></br>
+            <%=reviews[i].rating%></br>
+            <%=reviews[i].body%></br>
+        </li></br>
+        <% } %>
+    </ul>
     	
 </body>
 </html>

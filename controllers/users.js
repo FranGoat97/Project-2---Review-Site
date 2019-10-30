@@ -33,17 +33,6 @@ try {
   
 
 
-<<<<<<< HEAD
-  User.findById(req.params.id)
-  .populate({path: 'reviews'})
-  .exec((err, foundUser) => {
-    if(err){
-      res.send(err);
-    } else {
-        console.log(foundUser);
-        console.log(foundUser.reviews);
-=======
->>>>>>> master
       res.render('users/show.ejs', {
         
         user: foundUser, 

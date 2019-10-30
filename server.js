@@ -14,10 +14,10 @@ app.use(session({
   }));
 
 app.use(function(req,res,next){
-  console.log(req,req.session.username);
+  // console.log(req,req.session.username);
   res.locals.currentUser=req.session.username;
   res.locals.loggedIn=req.session.logged;
-  console.log(res.locals);
+  // console.log(res.locals);
   next();
 })
 

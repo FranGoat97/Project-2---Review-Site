@@ -112,6 +112,7 @@ router.post('/login', (req, res, next) => {
                 req.session.message  = '';
                 req.session.username = req.body.username;
                 req.session.logged   = true;
+                nowUser = user._id
                 console.log(req.session, req.body)
 
                 res.redirect('/users/' + user._id)

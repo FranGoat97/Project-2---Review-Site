@@ -7,18 +7,37 @@
 	 <div class="header clearfix">
         <nav>
             <ul class="navbar">
+
                 <a href="/">Home</a>
+
                     <%if(loggedIn){%>
+<<<<<<< HEAD
+                <a href="/users/<%=nowUser%>" >UserHome</a>
+
+=======
                 <a href="/users/" >UserHome</a>
                     <%}%>
                 <a href="/reviews/new">CreateReview</a>
                 <a href="/reviews">ViewAll</a>
                 <a href="/users/login">Login</a>    
                 <a href="/users/registration">Signup</a>
+>>>>>>> master
                 <a href="/logout">Logout</a>
                     
+                <a href="/reviews/new">CreateReview</a>
 
+                <a href="/reviews/">ViewAll</a>
+                    <%}%>
+                
+                    <%if(!loggedIn){%>
+                
+                <a href="/reviews/">ViewAll</a>
+                
+                <a href="/users/login">Login</a>  
 
+                <a href="/users/registration">Signup</a>
+
+                    <%}%>
 
             </ul>
             

@@ -11,7 +11,19 @@
             <%- include('../partials/navbar') %>
     <h1>All user reviews</h1>
 
+<<<<<<< HEAD
 
    
+=======
+    <ul>
+        <% for (let i = 0; i < reviews.length; i++) {%>
+        <li><b><em><u><%=reviews[i].subject%></u></em></b></br>
+            <%=reviews[i].rating%></br>
+            <%=reviews[i].body%></br>
+        </li></br>
+        <% } %>
+    </ul>
+    	
+>>>>>>> master
 </body>
 </html>

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user.js');
+const Review = require('../models/review.js');
 const bcrypt = require('bcryptjs');
 
 router.get('/', (req, res) => {
@@ -33,7 +34,10 @@ try {
 
 
       res.render('users/show.ejs', {
-        user: foundUser
+        
+        user: foundUser, 
+        reviews: foundUser.reviews
+
       });
   }  catch (err)
     {res.send(err)}

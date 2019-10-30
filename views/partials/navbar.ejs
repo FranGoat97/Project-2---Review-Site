@@ -7,8 +7,11 @@
 	 <div class="header clearfix">
         <nav>
             <ul class="navbar">
+
                 <a href="/">Home</a>
+
                     <%if(loggedIn){%>
+
 
                 <a href="/users/<%=nowUser%>" >UserHome</a>
 
@@ -25,6 +28,18 @@
                      <%}%>
 
 
+                <a href="/reviews/">ViewAll</a>
+                    <%}%>
+                
+                    <%if(!loggedIn){%>
+                
+                <a href="/reviews/">ViewAll</a>
+                
+                <a href="/users/login">Login</a>  
+
+                <a href="/users/registration">Signup</a>
+
+                    <%}%>
 
             </ul>
             

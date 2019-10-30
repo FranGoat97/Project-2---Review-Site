@@ -47,21 +47,30 @@ router.post('/', (req, res) => {
         }
     })
 })
+// working
 
 // edit route
 
-router.get('/:id', (req, res) => {
-    Review.findById(req.params.id, (err, foundReview) => {
-        if (err) {
-            res.send(err);
-        } else {
-            console.log('SOMETHING');
-            console.log(foundReview);
-            res.render('reviews/show.ejs', {
-                review: foundReview
+router.get('/:id/edit', async (req, res) => {
+    
+    try {
+    const allUsers = await User.find({})
+
+    const foundReviewUser = await User.findOne({'reviews': req.params.id})
+                            .populate({path: 'reviews', match: {_id: req.params.id}})
+                            .exec()
+
+   
+    
+            res.render('/edit.ejs', {
+                users: allUsers,
+                review: foundReviewUser.reviews[0],
+                reviewUser: foundReviewUser
             });
-        }
-    })
+    } catch(err){
+        res.send(err);
+    }
+
 });
 
 router.delete('/:id', async (req, res)=>{

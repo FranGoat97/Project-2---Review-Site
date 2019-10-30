@@ -6,13 +6,24 @@ const session = require('express-session');
 require('./db/db');
 
 app.set('view engine', 'ejs');
+
 app.use(session({
     secret: "secret string",
     resave: false, 
     saveUninitialized: false 
   }));
+
+app.use(function(req,res,next){
+  console.log(req,req.session.username);
+  res.locals.currentUser=req.session.username;
+  res.locals.loggedIn=req.session.logged;
+  console.log(res.locals);
+  next();
+})
+
 const userController = require('./controllers/users.js');
 const reviewController = require('./controllers/reviews.js');
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 app.use('/users', userController);

@@ -27,23 +27,25 @@ router.post('/', (req, res) => {
     // User's reviews array
     // the find user function needs to be req.body
     // because it is using the contents of the form
-    if (req.session.logged === true) {
-        User.findOne({username: req.session.username}, (err, foundUser) => {
-
-            console.log(user);
-
+    console.log(req.session);
+    User.findOne({username: req.session.username}, (err, foundUser) => {
+        if (err) {
+            
+            res.send (err);
+            
+        } else {
             Review.create(req.body, (err, createdReview) => {
                 if (err) {
                     res.send(err);
                 } else {
                     foundUser.reviews.push(createdReview);
                     foundUser.save((err, returnedData) => {
-                        res.redirect('reviews/index.ejs')
+                        res.redirect('/users/' + foundUser._id)
                     })
                 }
             })
-        })
-    }
+        }
+    })
 })
 
 // edit route

@@ -23,18 +23,54 @@ router.get('/registration', (req,res)=>{
     res.render('users/register.ejs')
 })
 
-router.get('/:id', (req, res) => {
+//show route
+router.get('/:id', async(req, res) => {
+  
+try {
 
-  User.findById(req.params.id, (err, foundUser) => {
-    if(err){
-      res.send(err);
-    } else {
+  const foundUser= await User.findById(req.params.id).populate('reviews').exec()
+  
+
+
       res.render('users/show.ejs', {
         user: foundUser
       });
-    }
-  })
+  }  catch (err)
+    {res.send(err)}
 
+});
+
+
+// delete one review?
+
+router.delete('/:id', async (req, res)=>{
+  // when we delete an article, we want to remove that
+  // article from the authors array
+  console.log('delete')
+  try {
+    // delete the article
+    const deleteReview = Review.findByIdAndRemove(req.params.id);
+    // find the author the article belongs too
+    // so we can remove the article from their array
+    const findUser = User.findOne({'reviews': req.params.id});
+
+    // Using promise all just as we did above
+    const [deletedReviewResponse, foundUser] = await Promise.all([deleteReview, findUser]);
+    console.log(foundUser, ' found user')
+    // here we are using mongooses method remove
+    // to remove the article by its id
+    // we are mutating the array
+    foundUser.reviews.remove(req.params.id);
+    // if we mutate the array we have to save it
+    await foundUser.save()
+    // now we can send a response back to the client
+    // the browser
+    console.log('after save')
+    res.redirect('/reviews')
+  } catch(err){
+    console.log(err)
+    res.send(err);
+  }
 });
 
 // password encrypt
@@ -52,7 +88,7 @@ router.post('/registration', (req, res, next) => {
 
   // lets put the password into the database
   User.create(userDbEntry, (err, user) => {
-    console.log(user)
+    console.log(req.session, req.body)
 
     // lets set up the session in here we can use the same code we created in the login
     req.session.username = user.username;
@@ -91,6 +127,9 @@ router.post('/login', (req, res, next) => {
   });
 
 })
+
+
+
 
 
 

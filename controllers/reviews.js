@@ -44,15 +44,14 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-    User.findOne({'reviews': req.params.id})
-    .populate({path: 'reviews', match: {_id: req.params.id}})
-    .exec((err, foundReview) => {
+    Review.findById(req.params.id, (err, foundReview) => {
         if (err) {
             res.send(err);
         } else {
+            console.log('SOMETHING');
+            console.log(foundReview);
             res.render('reviews/show.ejs', {
-                user: foundUser,
-                review: foundUser.reviews[0]
+                review: foundReview
             });
         }
     })

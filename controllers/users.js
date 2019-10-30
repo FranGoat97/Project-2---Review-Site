@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user.js');
+const Review = require('../models/review.js');
 const bcrypt = require('bcryptjs');
 
 router.get('/', (req, res) => {
@@ -25,12 +26,19 @@ router.get('/registration', (req,res)=>{
 
 router.get('/:id', (req, res) => {
 
-  User.findById(req.params.id, (err, foundUser) => {
+  User.findById(req.params.id)
+  .populate({path: 'reviews'})
+  .exec((err, foundUser) => {
     if(err){
       res.send(err);
     } else {
+        console.log(foundUser);
+        console.log(foundUser.reviews);
       res.render('users/show.ejs', {
-        user: foundUser
+        
+        user: foundUser, 
+        reviews: foundUser.reviews
+
       });
     }
   })

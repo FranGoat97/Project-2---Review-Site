@@ -10,6 +10,14 @@
      <div class="container">
             <%- include('../partials/navbar') %></div>
             <h2><%=user.username%> This is your User Homepage </h2>
+            <ul>
+                <% for (let i = 0; i < reviews.length; i++) {%>
+                    <li>
+                <label for="id">id</label><%=reviews[i]._id%></br>
+                <label for="subject">subject</label><%=reviews[i].subject%>
+                </li>
+                <% } %>
+            </ul>
 
 </body>
 </html>

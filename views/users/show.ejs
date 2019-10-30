@@ -7,9 +7,30 @@
     <title>Document</title>
 </head>
 <body>
+     <style>
+     	ul{list-style-type: none}
+     </style>
      <div class="container">
             <%- include('../partials/navbar') %></div>
-            <h2><%=user.username%> This is your User Homepage </h2>
+     <h1>Welcome <%=user.username%>, this is your User Homepage </h1>
+
+     <section>
+          <h2>Your Reviews:</h2>
+          <ul>
+              <% for(let i = 0; i < user.reviews.length; i++){ %>
+              	<li>Title: <%=user.reviews[i].subject%></li>
+              	<li>Rating: <%=user.reviews[i].rating%></li>
+              	<li>Review: <%=user.reviews[i].body%></li>
+              </br>
+		        <a href="/reviews/<%=user.reviews._id%>/edit">Edit</a>
+		        <form action="/reviews/<%=user.reviews._id%>?_method=DELETE" method="POST">
+		          <button type='submit'>Delete Review</button>
+		        </form></br>
+              <% } %>
+           </ul>
+          
+      </section>
+     
 
 </body>
 </html>

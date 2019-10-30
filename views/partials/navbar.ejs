@@ -8,7 +8,9 @@
         <nav>
             <ul class="navbar">
                 <a href="/">Home</a>
-                <a href="/users/">UserHome</a>
+                    <%if(loggedIn){%>
+                <a href="/users/" >UserHome</a>
+                    <%}%>
                 <a href="/reviews/new">CreateReview</a>
                 <a href="/reviews/index">ViewAll</a>
                 <a href="/users/login">Login</a>    

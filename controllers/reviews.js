@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
                 } else {
                     foundUser.reviews.push(createdReview);
                     foundUser.save((err, returnedData) => {
-                        res.redirect('reviews/index.ejs')
+                        res.redirect('/index.ejs')
                     })
                 }
             })

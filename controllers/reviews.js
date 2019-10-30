@@ -27,13 +27,6 @@ router.post('/', (req, res) => {
     // User's reviews array
     // the find user function needs to be req.body
     // because it is using the contents of the form
-<<<<<<< HEAD
-    
-        User.findOne({username: req.session.username}, (err, foundUser) => {
-
-            // console.log(user);
-
-=======
     console.log(req.session);
     User.findOne({username: req.session.username}, (err, foundUser) => {
         if (err) {
@@ -41,7 +34,6 @@ router.post('/', (req, res) => {
             res.send (err);
             
         } else {
->>>>>>> master
             Review.create(req.body, (err, createdReview) => {
                 if (err) {
                     res.send(err);
@@ -52,19 +44,13 @@ router.post('/', (req, res) => {
                     })
                 }
             })
-<<<<<<< HEAD
-        })
-    
-=======
         }
     })
->>>>>>> master
 })
 // working
 
 // edit route
 
-<<<<<<< HEAD
 router.get('/:id/edit', async (req, res) => {
     
     try {
@@ -80,17 +66,6 @@ router.get('/:id/edit', async (req, res) => {
                 users: allUsers,
                 review: foundReviewUser.reviews[0],
                 reviewUser: foundReviewUser
-=======
-router.get('/:id', (req, res) => {
-    Review.findById(req.params.id, (err, foundReview) => {
-        if (err) {
-            res.send(err);
-        } else {
-            console.log('SOMETHING');
-            console.log(foundReview);
-            res.render('reviews/show.ejs', {
-                review: foundReview
->>>>>>> master
             });
     } catch(err){
         res.send(err);

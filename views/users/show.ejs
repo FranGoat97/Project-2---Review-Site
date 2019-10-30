@@ -22,8 +22,8 @@
               	<li>Rating: <%=user.reviews[i].rating%></li>
               	<li>Review: <%=user.reviews[i].body%></li>
               </br>
-		        <a href="/reviews/<%=user.reviews._id%>/edit">Edit</a>
 		        <form action="/reviews/<%=user.reviews._id%>?_method=DELETE" method="POST">
+		        <a href="/reviews/<%=user.reviews._id%>/edit">Edit This Review</a>
 		          <button type='submit'>Delete Review</button>
 		        </form></br>
               <% } %>

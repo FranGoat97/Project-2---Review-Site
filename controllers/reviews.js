@@ -51,27 +51,46 @@ router.post('/', (req, res) => {
 
 // edit route
 
-router.get('/:id/edit', async (req, res) => {
+// router.get('/:id/edit', async (req, res) => {
     
-    try {
-    const allUsers = await User.find({})
+//     try {
+//     const allUsers = await User.find({})
 
-    const foundReviewUser = await User.findOne({'reviews': req.params.id})
-                            .populate({path: 'reviews', match: {_id: req.params.id}})
-                            .exec()
+//     const foundReviewUser = await User.findOne({'reviews': req.params.id})
+//                             .populate({path: 'reviews', match: {_id: req.params.id}})
+//                             .exec()
 
    
     
-            res.render('/edit.ejs', {
-                users: allUsers,
-                review: foundReviewUser.reviews[0],
-                reviewUser: foundReviewUser
-            });
-    } catch(err){
-        res.send(err);
-    }
+//             res.render('reviews/edit.ejs', {
+//                 users: allUsers,
+//                 review: foundReviewUser.reviews[0],
+//                 reviewUser: foundReviewUser
+//             });
+//     } catch(err){
+//         res.send(err);
+//     }
 
-});
+// });
+router.get('/:id/edit', (req, res) => {
+    // need to find the review by id?
+    User.findOne({username: req.session.username}, (err, foundUser) => {
+        if (err) {
+            res.send(err);
+        } else {
+            Review.findById(req.params.id, (err, foundReview) => {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.render('reviews/edit.ejs', {
+                        user: foundUser,
+                        review: foundReview
+                    })
+                }
+            })
+        }
+    })
+})
 
 router.delete('/:id', async (req, res)=>{
   // when we delete an article, we want to remove that
